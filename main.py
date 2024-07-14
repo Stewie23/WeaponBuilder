@@ -266,8 +266,8 @@ class LoadAttachmentsOperator(bpy.types.Operator):
         preferences = context.preferences.addons[__name__].preferences
         STL_PATH = preferences.stl_path
         attachments_folder = os.path.join(STL_PATH, "Attachments")
-        blend_path = os.path.join(attachments_folder, attachment_file)
-        stl_path = os.path.splitext(blend_path)[0] + '.stl'
+        stl_path = os.path.join(attachments_folder, attachment_file)
+        blend_path = os.path.splitext(stl_path)[0] + '.blend'
         attachment_filename = os.path.basename(attachment_file)
 
         if not os.path.exists(blend_path):

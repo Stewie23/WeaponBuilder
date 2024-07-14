@@ -63,7 +63,7 @@ def get_attachment_files(self, context):
     blend_files = [("None", "None", "")]
     for root, dirs, files in os.walk(attachments_folder):
         for file in files:
-            if file.endswith('.blend'):
+            if file.endswith('.stl'):
                 full_path = os.path.join(root, file)
                 blend_files.append((full_path, file, ""))
     

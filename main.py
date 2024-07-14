@@ -319,6 +319,10 @@ class LoadAttachmentsOperator(bpy.types.Operator):
             self.report({'ERROR'}, "STL object not found.")
             return {'CANCELLED'}
         
+        # Set origin to center of mass
+        bpy.context.view_layer.objects.active = stl_object
+        bpy.ops.object.origin_set(type='ORIGIN_CENTER_OF_MASS', center='BOUNDS')
+        
         # Parent the STL object to the empty object
         stl_object.parent = attachment_empty
         # move back after setting parent

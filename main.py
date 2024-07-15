@@ -20,7 +20,7 @@ bl_info = {
     "author": "Stewie",
     "description": "Add Attachments to Weapons",
     "blender": (4, 1, 0),
-    "version": (0, 0, 1),
+    "version": (1, 0, 0),
     "location": "",
     "warning": "",
     "category": "Object"

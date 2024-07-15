@@ -308,6 +308,9 @@ class LoadAttachmentsOperator(bpy.types.Operator):
         if not attachment_empty:
             self.report({'ERROR'},f"Attachment Empty object not found. Should start with: {os.path.splitext(attachment_filename)[0]}")
             return {'CANCELLED'}
+        
+        #add assigned before the name of the empty to avoid false linking if the same attachment gets added
+        attachment_empty.name = "Attached_" + attachment_empty.name
 
         stl_object = None
         for obj in stl_objects:
@@ -329,13 +332,13 @@ class LoadAttachmentsOperator(bpy.types.Operator):
         stl_object.matrix_parent_inverse = attachment_empty.matrix_world.inverted()
 
         # Position the attachment correctly
-        self.position_attachment(attachment_empty, attachment_file,point)
+        self.position_attachment(attachment_empty,point)
         
         self.report({'INFO'}, f"Attachment {attachment_file} loaded successfully")
 
         return {'FINISHED'}
     
-    def position_attachment(self, attachment_empty, attachment_file,point):
+    def position_attachment(self, attachment_empty,point):
         # Find the rail start and end points
         if "Muzzle" in point:
             # For Muzzle type attachment points, use only one point
@@ -370,7 +373,7 @@ class LoadAttachmentsOperator(bpy.types.Operator):
 
 
 
-        self.report({'INFO'}, f"Attachment {attachment_file} positioned and rotated successfully at {point}")
+        self.report({'INFO'}, f"Attachment {attachment_empty} positioned and rotated successfully at {point}")
         return {'FINISHED'}
     
 def register():
